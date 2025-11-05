@@ -2,6 +2,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import MenuItem from './menu-item.model';
 import { NavLink, DropdownItem } from 'react-bootstrap';
 import React from "react";
+import "./menu.css";
 
 export default function Menu({ title, items }: any) {
   return (
@@ -25,12 +26,12 @@ function MenuItems({ title, items }: any) {
   const menuItems = items.map((menuItem: MenuItem) => {     
     if (menuItem.children) {
       return (
-        <React.Fragment key={ menuItem.routerLink }>
-          <i className={ "bi bi-" + menuItem.icon! } style={{ float: "left" }}></i>
+        <div className="menuItem">
+          <i className={ "icon bi bi-" + menuItem.icon! } style={{ float: "left" }}></i>
           <NavDropdown title={ menuItem.displayName } id="basic-nav-dropdown">
             { MenuItems({ title: menuItem.displayName, items: menuItem.children }) }
           </NavDropdown>
-        </React.Fragment>
+        </div>
       );    
     } else {
       return (

@@ -3,5 +3,16 @@
 }
 
 .menuItem .icon {
+  float: left;
   margin: 8px 5px 0 0;
+}
+
+.caret-right .nav-link.dropdown-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.caret-right .nav-link.dropdown-toggle::after {
+  margin-left: auto;
 }

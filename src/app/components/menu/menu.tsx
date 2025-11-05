@@ -1,7 +1,6 @@
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import MenuItem from './menu-item.model';
 import { NavLink, DropdownItem } from 'react-bootstrap';
-import React from "react";
 import "./menu.css";
 
 export default function Menu({ title, items }: any) {
@@ -13,8 +12,8 @@ export default function Menu({ title, items }: any) {
 }
 
 function MenuItems({ title, items }: any) {
-  if (items.length < 1)
-    return;
+  if (!items?.length || items.length < 1)
+    throw new Error("Unknown items argument");
 
   if (items.length == 1)
     return (
@@ -24,11 +23,11 @@ function MenuItems({ title, items }: any) {
     );
 
   const menuItems = items.map((menuItem: MenuItem) => {     
-    if (menuItem.children) {
+    if (menuItem.children) {     
       return (
-        <div className="menuItem">
-          <i className={ "icon bi bi-" + menuItem.icon! } style={{ float: "left" }}></i>
-          <NavDropdown title={ menuItem.displayName } id="basic-nav-dropdown">
+        <div key={ menuItem.routerLink } className="menuItem">
+          <i className={ "icon bi bi-" + menuItem.icon! }></i>
+          <NavDropdown title={ menuItem.displayName } className="caret-right dropend">
             { MenuItems({ title: menuItem.displayName, items: menuItem.children }) }
           </NavDropdown>
         </div>

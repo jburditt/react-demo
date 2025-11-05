@@ -4,6 +4,14 @@ import { NavLink, DropdownItem } from 'react-bootstrap';
 import React from "react";
 
 export default function Menu({ title, items }: any) {
+  return (
+    <NavDropdown title={ title } id="basic-nav-dropdown">
+      { MenuItems({ title, items }) }
+    </NavDropdown>
+  );
+}
+
+function MenuItems({ title, items }: any) {
   if (items.length < 1)
     return;
 
@@ -14,22 +22,24 @@ export default function Menu({ title, items }: any) {
       </NavLink>
     );
 
-  const menuItems = items.map((menuItem: MenuItem) => {            
-    return (
-      <React.Fragment key={ menuItem.routerLink }>
+  const menuItems = items.map((menuItem: MenuItem) => {     
+    if (menuItem.children) {
+      return (
+        <React.Fragment key={ menuItem.routerLink }>
+          <i className={ "bi bi-" + menuItem.icon! } style={{ float: "left" }}></i>
+          <NavDropdown title={ menuItem.displayName } id="basic-nav-dropdown">
+            { MenuItems({ title: menuItem.displayName, items: menuItem.children }) }
+          </NavDropdown>
+        </React.Fragment>
+      );    
+    } else {
+      return (
         <DropdownItem key={ menuItem.routerLink } href={ menuItem.routerLink }>
           <i className={ "bi bi-" + menuItem.icon! }></i> { menuItem.displayName }
         </DropdownItem> 
-        <div style={{ marginLeft: "32px" }}>
-          { !!menuItem.children && Menu({ title: menuItem.displayName, items: menuItem.children }) }
-        </div>
-      </React.Fragment>
-    );
+      );    
+    }
   });
 
-  return (
-    <NavDropdown title={ title } id="basic-nav-dropdown">
-      { menuItems }
-    </NavDropdown>
-  )
+  return menuItems;
 }

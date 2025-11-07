@@ -24,11 +24,11 @@ export default function Header() {
     <>
       <Navbar className="bg-body-tertiary">
         <Container>
-          <NavbarBrand href="#home">Fullswing Solutions</NavbarBrand>
+          <NavbarBrand href="/">Fullswing Solutions</NavbarBrand>
           <NavbarToggle aria-controls="basic-navbar-nav" />
           <NavbarCollapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <NavLink href="#home">Home</NavLink>
+            <NavLink href="/">Home</NavLink>
             <Menu title="Menu" items={ menuItemList } />
           </Nav>
         </NavbarCollapse>

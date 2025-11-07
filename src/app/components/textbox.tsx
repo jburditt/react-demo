@@ -7,7 +7,7 @@ export default function Textbox({ label, controlName, required }: any) {
     <Form.Group as={Col} md="4">
       <Form.Label>
         { label }
-        <Form.Control type="text" id={ controlName } required={ required } />
+        <Form.Control type="text" name={ controlName } required={ required } />
         <Feedback type="invalid">
           { label } is required.
         </Feedback>

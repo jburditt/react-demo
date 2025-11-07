@@ -8,10 +8,14 @@ export default function PageComponent() {
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
       event.stopPropagation();
+    } else {
+      const formData = new FormData(form);
+      const formJson = Object.fromEntries(formData.entries());
+      console.log("formJson", formJson);
     }
     setValidated(true);
   };
@@ -24,7 +28,7 @@ export default function PageComponent() {
 
       <fieldset>
         <legend>Reactive Form</legend>
-        <Form noValidate validated={ validated } method="post" onSubmit={ handleSubmit }>
+        <Form noValidate validated={ validated } onSubmit={ handleSubmit }>
           <Row className="mb-3">
             <Textbox label="First Name" controlName="firstName" required></Textbox>
             <Textbox label="Last Name" controlName="lastName" required></Textbox>

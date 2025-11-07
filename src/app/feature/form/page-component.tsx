@@ -2,7 +2,7 @@
 
 import Textbox from "@/app/components/textbox";
 import { FormEvent, useState } from "react";
-import { Form, Row } from "react-bootstrap";
+import { Button, Form, Row } from "react-bootstrap";
 
 export default function PageComponent() {
   const [validated, setValidated] = useState(false);
@@ -35,9 +35,8 @@ export default function PageComponent() {
 
           </Row>
 
-          <button type="submit" color="primary">
-            Submit
-          </button>
+          <Button type="submit" variant="primary">Submit</Button>
+
         </Form>
       </fieldset>
     </>

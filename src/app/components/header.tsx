@@ -1,16 +1,18 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { NavbarBrand, NavbarToggle, NavbarCollapse, NavLink, DropdownItem } from 'react-bootstrap';
+import { NavbarBrand, NavbarToggle, NavbarCollapse, NavLink } from 'react-bootstrap';
 import Menu from './menu/menu';
 import MenuItem from './menu/menu-item.model';
 
 const menuItemList: Array<MenuItem> = [
     new MenuItem('Home', '/', 'house-door'),
     new MenuItem('User', '/user', 'file-earmark-person', [
+      new MenuItem('User', '/user', 'file-earmark-person'),
       new MenuItem('Search', '/user/search', 'search')
     ]),
     new MenuItem('Form', '/feature/form', 'folder', [
+      new MenuItem('Form', '/feature/form', 'folder'),
       new MenuItem('Flags', '/feature/flags', 'flag'),
       new MenuItem('NgRx Store', '/feature/ngrx-store', 'box-fill')
     ]),

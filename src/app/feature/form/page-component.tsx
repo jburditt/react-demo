@@ -1,5 +1,6 @@
 'use client'
 
+import Address from "@/app/components/address";
 import Textbox from "@/app/components/textbox";
 import { FormEvent, useState } from "react";
 import { Button, Form, Row } from "react-bootstrap";
@@ -33,9 +34,9 @@ export default function PageComponent() {
             <Textbox label="First Name" controlName="firstName" required></Textbox>
             <Textbox label="Last Name" controlName="lastName" required></Textbox>
 
-            {/* <fs-datepicker [datePickerFormControl]="$any(searchForm.get('date'))"></fs-datepicker>
+            {/* <fs-datepicker [datePickerFormControl]="$any(searchForm.get('date'))"></fs-datepicker> */}
 
-            <fs-address [addressForm]="$any(searchForm.get('addressForm'))"></fs-address> */}
+            <Address />
 
           </Row>
 

@@ -1,19 +1,17 @@
-import React from 'react';
-//import { Form } from 'react-bootstrap';
-//import { FormLabel } from 'react-bootstrap';
-//import { FormControl } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
 import Feedback from 'react-bootstrap/Feedback';
 
 export default function Textbox({ label, controlName, required }: any) {
-  console.log("required", required);
   return (
-    <>
-      <Form.Label htmlFor="inputPassword5">{ label }</Form.Label>
-      <Form.Control type="text" id="inputPassword5" required={ required } aria-describedby="passwordHelpBlock" />
-      <Feedback type="invalid">
-        { label } is required.
-      </Feedback>
-    </>
+    <Form.Group as={Col} md="4">
+      <Form.Label>
+        { label }
+        <Form.Control type="text" id={ controlName } required={ required } />
+        <Feedback type="invalid">
+          { label } is required.
+        </Feedback>
+      </Form.Label>
+    </Form.Group>
   );
 }

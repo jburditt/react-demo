@@ -1,11 +1,12 @@
 'use client';
 
 import Textbox from "@/app/components/textbox";
-import { FormEvent, useState } from "react";
-import { Button, Form, Row } from "react-bootstrap";
+import { FormEvent, useEffect, useState } from "react";
+import { Button, Form, Row, Table } from "react-bootstrap";
 import buildQuery from 'odata-query'
 
 export default function Page() {
+  const [users, setUsers] = useState(Array<any>);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -17,13 +18,20 @@ export default function Page() {
     //console.log("searchForm", this.searchForm.value);
     const filter = { and: { FirstName: { contains: formJson.firstName }, LastName: { contains: formJson.lastName } } };
     const query = buildQuery({ filter });
-    fetch(`https://localhost:8080/api/User${query}`).then(async (response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const data = await response.json();
-      console.log("data", data);
-    });
+    //useEffect(() => {
+      fetch(`https://localhost:8080/api/User${query}`)
+        .then(async (response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          const data = await response.json();
+          setUsers(data);
+          console.log("data", users);
+        })
+        .catch((err) => {
+          console.error("fetch error", err);
+        });
+    //});
   };
 
   return (
@@ -32,7 +40,7 @@ export default function Page() {
       <p>An example of using OData to query the database</p>
       <br />
 
-      <fieldset>
+      <fieldset className="mb-5">
         <legend>Search</legend>
         <br />
 
@@ -45,7 +53,28 @@ export default function Page() {
         </Form>
       </fieldset>
 
-
+      { (users && users.length > 0) &&
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>
+              <td>First Name</td>
+            </th>
+            <th>
+              <td>Last Name</td>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          { users.map((user) => (
+            <><tr>
+              <td>{ user.firstName }</td>
+              <td>{ user.lastName }</td>
+            </tr></>  
+          ))}
+        </tbody>
+      </Table>
+      }
     </>
   );
-  }
+}

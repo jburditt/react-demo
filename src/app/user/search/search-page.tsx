@@ -1,14 +1,20 @@
 'use client';
 
 import Textbox from "@/app/components/textbox";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useState, MouseEvent } from "react";
 import { Button, Form, Row, Table } from "react-bootstrap";
 import buildQuery from 'odata-query'
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
+  const router = useRouter();
   const [users, setUsers] = useState(Array<any>);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleEditClick = (event: any) => {
+    router.push(`${event.target.value}`); // Replace '/new-page' with your desired route
+  };
+
+  const handleSearchSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
@@ -18,20 +24,18 @@ export default function Page() {
     //console.log("searchForm", this.searchForm.value);
     const filter = { and: { FirstName: { contains: formJson.firstName }, LastName: { contains: formJson.lastName } } };
     const query = buildQuery({ filter });
-    //useEffect(() => {
-      fetch(`https://localhost:8080/api/User${query}`)
-        .then(async (response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          const data = await response.json();
-          setUsers(data);
-          console.log("data", users);
-        })
-        .catch((err) => {
-          console.error("fetch error", err);
-        });
-    //});
+    fetch(`https://localhost:8080/api/User${query}`)
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        setUsers(data);
+        console.log("data", users);
+      })
+      .catch((err) => {
+        console.error("fetch error", err);
+      });
   };
 
   return (
@@ -44,7 +48,7 @@ export default function Page() {
         <legend>Search</legend>
         <br />
 
-        <Form onSubmit={ handleSubmit } noValidate>
+        <Form onSubmit={ handleSearchSubmit } noValidate>
           <Row className="mb-3">
             <Textbox label="Last Name" controlName="lastName" />
             <Textbox label="First Name" controlName="firstName" />
@@ -57,20 +61,24 @@ export default function Page() {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>
-              <td>First Name</td>
-            </th>
-            <th>
-              <td>Last Name</td>
-            </th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          { users.map((user) => (
-            <><tr>
+          { users.map((user, key) => (
+            <tr key={ key }>
               <td>{ user.firstName }</td>
               <td>{ user.lastName }</td>
-            </tr></>  
+              <td>{ user.username }</td>
+              <td>{ user.email }</td>
+              <td>
+                <Button type="button" onClick={ handleEditClick } value={ user.id } variant="primary">Edit</Button>
+              </td>
+            </tr> 
           ))}
         </tbody>
       </Table>

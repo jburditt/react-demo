@@ -1,6 +1,9 @@
+'use client'
+
 import { Model } from "survey-core";
 import { Survey } from 'survey-react-ui';
-import { PlainLight } from 'survey-core/themes';
+import { PlainDark } from 'survey-core/themes';
+import 'survey-core/survey-core.css';
 
 export default async function Page({ params }: any) {
 
@@ -25,7 +28,7 @@ const surveyJson = {
     };
 
     let survey = new Model(surveyJson);
-    survey.applyTheme(PlainLight);
+    survey.applyTheme(PlainDark);
     survey.completeText = "Add User";
     survey.completedHtml = "User added successfully!";
     // if (this.id()) {

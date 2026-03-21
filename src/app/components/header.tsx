@@ -8,7 +8,7 @@ import MenuItem from './menu/menu-item.model';
 const menuItemList: Array<MenuItem> = [
     new MenuItem('Home', '/', 'house-door'),
     new MenuItem('User', '/user', 'file-earmark-person', [
-      new MenuItem('User', '/user', 'file-earmark-person'),
+      new MenuItem('User', '/user/form/1', 'file-earmark-person'),
       new MenuItem('Search', '/user/search', 'search')
     ]),
     new MenuItem('Form', '/feature/form', 'folder', [

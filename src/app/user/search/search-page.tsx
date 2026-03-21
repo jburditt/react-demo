@@ -24,7 +24,8 @@ export default function Page() {
     //console.log("searchForm", this.searchForm.value);
     const filter = { and: { FirstName: { contains: formJson.firstName }, LastName: { contains: formJson.lastName } } };
     const query = buildQuery({ filter });
-    fetch(`https://localhost:8080/api/User${query}`)
+    const firstName = !!formJson.firstName ? formJson.firstName as string : "email" as string;
+    fetch(`http://localhost:8080/users/${firstName}/${formJson.lastName}`)
       .then(async (response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -50,8 +51,8 @@ export default function Page() {
 
         <Form onSubmit={ handleSearchSubmit } noValidate>
           <Row className="mb-3">
-            <Textbox label="Last Name" controlName="lastName" />
-            <Textbox label="First Name" controlName="firstName" />
+            <Textbox label="Username" controlName="firstName" />
+            <Textbox label="Email" controlName="lastName" />
           </Row>
           <Button type="submit" variant="primary">Search</Button> 
         </Form>

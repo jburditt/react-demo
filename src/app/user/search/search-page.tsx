@@ -21,6 +21,9 @@ export default function Page() {
     const formJson = Object.fromEntries(formData.entries());
     console.log("formJson", formJson); 
 
+    if (!formJson.firstName && !formJson.lastName)
+      return;
+
     //console.log("searchForm", this.searchForm.value);
     const filter = { and: { FirstName: { contains: formJson.firstName }, LastName: { contains: formJson.lastName } } };
     const query = buildQuery({ filter });

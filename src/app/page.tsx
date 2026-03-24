@@ -8,7 +8,7 @@ export default function Home() {
     <>
       <h1>Home</h1>
 
-      Welcome to "React Bootstrap Demo", a demo Angular application to showcase the use of
+      Welcome to &quot;React Bootstrap Demo&quot;, a demo Angular application to showcase the use of
       various React libraries and components, including:
 
       <ul>
@@ -16,7 +16,7 @@ export default function Home() {
         <li>OAuth authentication -&gt; Auth guard, Azure AD</li>
         <li>Dependency Injection -&gt; Logging service, Toast service</li>
         <li>Datepicker</li>
-        <li>NgRx Store</li>
+        <li>Reflex State Management</li>
         <li>OData query -&gt; Query database using OData .NET EF controllers</li>
         <li>Menu -&gt; Routing</li>
         <li>SurveyJS -&gt; Automate creating form from model, and loading form from database</li>

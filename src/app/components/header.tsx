@@ -14,7 +14,7 @@ const menuItemList: Array<MenuItem> = [
     new MenuItem('Form', '/feature/form', 'folder', [
       new MenuItem('Form', '/feature/form', 'folder'),
       new MenuItem('Flags', '/feature/flags', 'flag'),
-      new MenuItem('NgRx Store', '/feature/ngrx-store', 'box-fill')
+      new MenuItem('Reflex Store', '/feature/state', 'box-fill')
     ]),
     new MenuItem('Admin', '/admin', 'gear'),
   ];

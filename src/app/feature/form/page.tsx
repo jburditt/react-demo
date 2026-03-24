@@ -1,5 +1,0 @@
-import PageComponent from './form-page';
-
-export default function Page() {
-  return <PageComponent />
-}

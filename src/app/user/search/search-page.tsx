@@ -45,7 +45,7 @@ export default function Page() {
   return (
     <>
       <h1>Search Users</h1>
-      <p>An example of using OData to query the database</p>
+      <p>An example of using OData to query the database (NOTE true only when integrating with .NET backend example, Django backend still pending)</p>
       <br />
 
       <fieldset className="mb-5">

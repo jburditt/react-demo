@@ -28,7 +28,7 @@ export default function Page() {
     const filter = { and: { FirstName: { contains: formJson.firstName }, LastName: { contains: formJson.lastName } } };
     const query = buildQuery({ filter });
     const firstName = !!formJson.firstName ? formJson.firstName as string : "email" as string;
-    fetch(`http://localhost:8080/users/${firstName}/${formJson.lastName}`)
+    fetch(`https://webapp-python-bootstrap.azurewebsites.net/users/${firstName}/${formJson.lastName}`)
       .then(async (response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
